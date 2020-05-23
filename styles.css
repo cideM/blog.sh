@@ -1,0 +1,97 @@
+body {
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+html {
+    font-family: sans;
+    font-size: 16px;
+    line-height: 1.4;
+    color: hsla(0,0%,0%,0.8);
+}
+
+header {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}
+
+code {
+    font-family: 'Roboto Mono', mono;
+    font-size: 1rem;
+    background: #fff4ea;
+    padding: 0 0.3em;
+}
+
+pre {
+    overflow: auto;
+    background: #fff4ea;
+    padding: 1rem;
+}
+
+pre code {
+    padding: 0;
+    font-size: 0.80rem;
+    background: #fff4ea;
+}
+
+blockquote {
+    position: relative;
+    padding: 1rem 2rem;
+    margin: 0;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+blockquote::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 0.46667rem;
+    background: rgba(0, 0, 0, 0) linear-gradient(120deg, rgb(132, 250, 176) 0%, rgb(143, 211, 244) 100%) repeat scroll 0% 0%;
+}
+
+a {
+    color: #074db9;
+    text-decoration: underline;
+}
+
+.toc {
+    padding: 0;
+}
+
+.toc_link {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.8em;
+}
+
+.github_link {
+    color: inherit;
+    text-decoration: underline;
+}
+
+
+.toc li {
+    list-style-type: none;
+    margin-bottom: 3rem;
+}
+
+.toc_date {
+    margin-top: 0.35rem;
+}
+
+.post_title {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.post_date {
+    text-align: center;
+}
