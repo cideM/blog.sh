@@ -4,6 +4,7 @@
 
 - Fish shell
 - Pandoc
+- Optional but recommended: `miniserve` for serving files in `public`
 
 ## How
 
