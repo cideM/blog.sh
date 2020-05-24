@@ -1,3 +1,4 @@
+.PHONY: build
 build: build.fish posts
 	mkdir -p ./public; ./build.fish
 
