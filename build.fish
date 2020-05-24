@@ -24,7 +24,7 @@ for f in (find . -name "*.md" | sort -t "/" -k 4 -r)
 
     set -l date (string trim (string replace -a -r "['\"]" "" $front_matter[2]))
     set -l title (string trim "$front_matter[1]")
-    set -l path (string lower (string join "_" (string split " " "$title")))
+    set -l path (string escape --style=url (string lower (string join "_" (string split " " "$title"))))
 
     set -a table_of_contents "<li>"
     set -a table_of_contents "<a class=\"toc_link\" href=\"/$path.html\">$title</a>"

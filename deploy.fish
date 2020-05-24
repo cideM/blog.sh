@@ -1,7 +1,5 @@
 #!/usr/bin/env fish
 
-./build.fish
-
 zip -r deploy.zip public
 
 if test ! -n "$FBRS_DEPLOY_TOKEN"
