@@ -1,5 +1,9 @@
 #!/usr/bin/env fish
 
+if not test -d public
+    mkdir -p public
+end
+
 read --null --local main_tpl < ./index.html
 
 set --local table_of_contents
