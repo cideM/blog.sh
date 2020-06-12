@@ -1,6 +1,6 @@
 ---
 title: React Hooks are Tricky
-date: '2019-07-15'
+date: 2019-07-15
 publish: true
 ---
 

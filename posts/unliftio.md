@@ -1,6 +1,6 @@
 ---
 title: Understanding unliftio
-date: '2019-05-30'
+date: 2019-05-30
 publish: true
 ---
 

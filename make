@@ -4,7 +4,7 @@ switch "$argv[1]"
     case build
         echo "Building..."
         mkdir -p ./public
-        ./build.fish
+        ./build.sh
         echo "Done"
     case clean
         echo "Cleaning..."

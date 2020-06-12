@@ -1,11 +1,12 @@
-#!/usr/bin/env fish
+#!/bin/sh
 
 zip -r deploy.zip public
 
-if test ! -n "$FBRS_DEPLOY_TOKEN"
+if ! test  -n "$FBRS_DEPLOY_TOKEN"
+then
     echo "no FBRS_DEPLOY_TOKEN env var"
     exit 1
-end
+fi
 
 curl -H "Content-Type: application/zip" \
      -H "Authorization: Bearer $FBRS_DEPLOY_TOKEN" \

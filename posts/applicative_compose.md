@@ -1,6 +1,6 @@
 ---
 title: The Compose Newtype and its Applicative Instance
-date: '2019-03-27'
+date: 2019-03-27
 publish: true
 ---
 

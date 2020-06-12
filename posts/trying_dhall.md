@@ -1,6 +1,6 @@
 ---
 title: Exploring the Dhall configuration language
-date: '2020-04-28'
+date: 2020-04-28
 publish: true
 ---
 
