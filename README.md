@@ -1,7 +1,17 @@
 # Quick Start
 
 ```sh
-make build
+$ nix-shell
+$ make build
+Building...
+Done
+$ ls public
+applicative_compose.html
+dont_try_nix.html
+dotfiles.html
+hooks.html
+index.html
+styles.css
+trying_dhall.html
+unliftio.html
 ```
-
-Pulls a [docker image](https://github.com/pandoc/dockerfiles#current-latest-tag) for `pandoc` and generates the static files in `./public`
