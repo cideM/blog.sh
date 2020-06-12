@@ -89,7 +89,7 @@ while IFS= read -r f ; do
     TOC="$TOC
     </li>"
 
-    post=$(docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex:2.6 --from markdown --to html "$file_in")
+    post=$(pandoc --from markdown --to html "$file_in")
 
     post="<p class=\"post_date\">$post_date</p>$post"
     post="<h1 class=\"post_title\">$post_title</h1>$post"
