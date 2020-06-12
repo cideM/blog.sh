@@ -1,18 +1,22 @@
-#!/usr/bin/env fish
+#!/bin/sh
 
-switch "$argv[1]"
-    case build
+case "$1" in
+    build)
         echo "Building..."
         mkdir -p ./public
         ./build.sh
         echo "Done"
-    case clean
+        ;;
+    clean)
         echo "Cleaning..."
         rm -r ./public
         echo "Done"
-    case deploy
+        ;;
+    deploy)
         echo "Deploying..."
         ./deploy.fish
         echo "Done"
-end
+        ;;
+esac
 
+# vim ft:sh
