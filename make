@@ -14,7 +14,7 @@ case "$1" in
         ;;
     deploy)
         echo "Deploying..."
-        ./deploy.fish
+        ./deploy.sh
         echo "Done"
         ;;
 esac
