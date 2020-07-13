@@ -1,7 +1,6 @@
 # Quick Start
 
 ```sh
-$ nix-shell
 $ make build
 Building...
 Done
