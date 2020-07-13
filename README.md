@@ -1,6 +1,7 @@
 # Quick Start
 
 ```sh
+$ make install
 $ make build
 Building...
 Done
