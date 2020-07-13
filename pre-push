@@ -1,0 +1,4 @@
+#!/bin/sh
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+"$GIT_ROOT"/update_mirror.sh
