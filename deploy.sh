@@ -1,6 +1,8 @@
 #!/bin/sh
 
-zip -r deploy.zip public
+# Use junk paths option so that /nix/store/foo/bar.html becomes just bar.html
+# in the archive
+zip -j deploy.zip "$@"
 
 if ! test  -n "$FBRS_DEPLOY_TOKEN"
 then

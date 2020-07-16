@@ -1,8 +1,14 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
+  blog = import ./default.nix;
 in
-pkgs.mkShell {
+with pkgs;
+mkShell {
+  inherit blog;
   buildInputs = [
-    pkgs.pandoc
+    pandoc
+    zip
+    nixpkgs-fmt
+    shellcheck
   ];
 }
