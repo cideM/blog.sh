@@ -1,9 +1,3 @@
----
-title: The Compose Newtype and its Applicative Instance
-date: 2019-03-27
-publish: true
----
-
 When I went through _Haskell From First Principle_ the first time, I struggled with the `Compose` applicative instance, which is part of an exercise in chapter 25. This post will give you a quick overview of the `Compose` data type and then explain how the applicative instance for that type works.
 
 The `Compose` data type is [part of base](http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Functor-Compose.html) and allows composing two functors:

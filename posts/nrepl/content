@@ -1,9 +1,3 @@
----
-title: Connect to nREPL Running in Docker
-date: 2020-07-17
-publish: true
----
-
 You're creating a Clojure application and you want to make sure that everyone on your team enjoys the same local development setup. So you create a Dockerfile for your app and start the whole thing with Docker Compose.
 
 Except that you can't connect to the nREPL running inside the container. The alias for starting the repl is...

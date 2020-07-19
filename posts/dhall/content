@@ -1,9 +1,3 @@
----
-title: Exploring the Dhall configuration language
-date: 2020-04-28
-publish: true
----
-
 Over the last weekend I looked into the [Dhall configuration language](https://dhall-lang.org/). I'm a fan of pure, functional programming in general and the works of [Gabriel Gonzalez](http://www.haskellforall.com/) specifically and so Dhall seemed like something I would like. I'm also not super happy with the way we handle kubernetes configuration files at work through helm, so I'm always looking for alternatives to that.
 
 In this post I'll write down my first impressions of the language, which I got from creating [type definitions and default values](https://github.com/cideM/dhall-alacritty) for the [alacritty terminal emulator](https://github.com/alacritty/alacritty). In other words: I don't have a lot of experience with Dhall yet and haven't used it in a professional context. I'm not going to go through all the language features here, since the website does that much better. Instead, I'll go over some things which stood out to me while exploring Dhall. After that I'll show you an example of how Dhall can make working with configs safer **and simpler for the end user** before I get to the closing thoughts. Please also not that this is not an exhaustive introduction to the language. I'll do my best to add context to all of the code snippets, but not all of them are beginner friendly if you've never worked with a pure, functional language before.

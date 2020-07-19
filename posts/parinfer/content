@@ -1,9 +1,3 @@
----
-title: Installing parinfer-rust for Neovim on NixOS
-date: 2020-07-18
-publish: true
----
-
 ## Update Sun 19 Jul 2020 04:24:39 PM CEST
 
 Actually you can just drop `pkgs.parinfer-rust` into your (Neo)Vim plugins list like so

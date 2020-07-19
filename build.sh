@@ -37,31 +37,11 @@ HTML_SKELETON_POST='
 </body>
 </html>'
 
-# Sort posts by date from frontmatter, in descending order. Print the filename
-# as well, so I can sort filenames through the dates I got from the
-# frontmatter. It's important that filename and frontmatter are on the same
-# line for this. The echo '|' is used so I can easily split each line into its
-# individual parts.
-# Here's what the multiline pipeline does:
-# 1. Read lines between --- and --- (frontmatter)
-# 2. Remove first and last line, so remove the fences "---"
-# 3. Split each line on : and print the 2nd part
-# 4. Remove the preceding whitespace
-# 5. Read the consecutive lines and add | in front of every line
-# 6. Replace newlines with space, turning the multilines into foo|bar|bax
-SORTED_WITH_FRONT_MATTER=$(\
-for f in posts/*.md
+POSTS_SORTED=$(\
+for f in posts/*/date
 do
-    front_matter=$(\
-    sed -n -e '/^---$/,/^---$/p' "$f"\
-        | sed '1d;$d'\
-        | awk -F':' '{print $2}'\
-        | sed 's/^ *//'\
-        | while read -r n; do printf '|%s' "$n"; done\
-        | tr '\n' ' '\
-    )
-    printf '%s%s\n' "$f" "$front_matter"
-done | sort -t '|' -r -k 3)
+    printf '%s|%s\n' "$f" $(cat $f)
+done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname)
 
 # Here's the standard POSIX way of looping over a multiline string in a
 # variable:
@@ -75,10 +55,9 @@ while IFS= read -r f ; do
         continue
     fi
 
-    post_date=$(echo "$f" | awk -F'|' '{ print $3 }')
-    post_title=$(echo "$f" | awk -F'|' '{ print $2 }')
-    file_in=$(echo "$f" | awk -F'|' '{ print $1 }')
-    file_out="$(echo "$file_in" | sed 's/posts//' | sed 's/.md//')".html
+    post_date=$(cat "$f"/date)
+    post_title=$(cat "$f"/title)
+    file_out="$(basename "$f")".html
 
     TOC="$TOC
     <li>"
@@ -89,7 +68,7 @@ while IFS= read -r f ; do
     TOC="$TOC
     </li>"
 
-    post=$(pandoc --from markdown --to html "$file_in")
+    post=$(pandoc --from markdown --to html "$f"/content)
 
     post="<p class=\"post_date\">$post_date</p>$post"
     post="<h1 class=\"post_title\">$post_title</h1>$post"
@@ -98,12 +77,12 @@ while IFS= read -r f ; do
 
     # Couldn't easily do this with sed since the replacement string needs to be
     # escaped
-    printf "%s" "$pre_with_title" > ./public/"$file_out" 
+    printf "%s" "$pre_with_title" > ./public/"$file_out"
     printf "%s" "$post" >> ./public/"$file_out"
     echo "$HTML_SKELETON_POST" >> ./public/"$file_out"
 
 done <<EOF
-$SORTED_WITH_FRONT_MATTER
+$POSTS_SORTED
 EOF
 # ^ Use HERE document instead of piping echo so it's not executed in subshell,
 # since then the variable assignments are local to the loop

@@ -1,9 +1,3 @@
----
-title: How To Fish Subcommands
-date: 2020-06-14 
-publish: true
----
-
 I'm currently working on a somewhat minimalistic Fish Shell implementation of [jrnl](https://github.com/jrnl-org/jrnl/), a popular CLI journal tool written in Python. [My Fish version](https://github.com/cideM/fish-journal/blob/master/functions/journal.fish) is still a work in progress but there's one insight I'd like to share: how to correctly implement subcommands in Fish so that CLI are options are passed through to subcommands.
 
 My first attempt looked something like this. At the bottom of this snippet (which you can paste into a file and run!) I'm defining the "main" export, a function called `foo`. This function has a single subcommand, to which it passes its arguments. That function, called `__hello`, defines a single option, `-i` (or `--info`). Additionally, there's some shared functionality implemented in `__shared`. And to make matters a bit more complicated, `__shared` also accepts an option.
