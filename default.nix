@@ -1,12 +1,17 @@
 let
   pkgs = import <nixpkgs> {};
 
-in 
+in
   with pkgs;
   stdenv.mkDerivation {
     pname = "fbrs-blog";
+
     version = "latest";
-    src = ./.;
+
+    src = builtins.path {
+      name = "source";
+      path = ./.;
+    };
 
     buildInputs = [ pandoc ];
 
