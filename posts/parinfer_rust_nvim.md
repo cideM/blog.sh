@@ -4,6 +4,28 @@ date: 2020-07-18
 publish: true
 ---
 
+## Update Sun 19 Jul 2020 04:24:39 PM CEST
+
+Actually you can just drop `pkgs.parinfer-rust` into your (Neo)Vim plugins list like so
+
+```nix
+{
+    programs.neovim.configure = {
+      customRC = builtins.readFile ./init.vim;
+
+      packages.n = {
+        start = [ pkgs.parinfer-rust ];
+
+        opt = [ ];
+      };
+    };
+}
+```
+
+This will install the plugin and run the `postInstall` hook. The only problem is that it doesn't install the docs, nor build the helptags. I should create an issue for that. In the meantime I'll stick with my custom installation method.
+
+## Original
+
 There's a very nice Rust library, [`parinfer-rust`](https://github.com/eraserhd/parinfer-rust), which implements the pretty well known Parinfer editing mode for Lisp languages, but in Rust. The library also comes with a (Neo)Vim plugin, which I wanted to install with `buildVimPluginFrom2Nix`.
 
 At first I tried installing the plugin like any other:
