@@ -10,8 +10,11 @@ in
 
     buildInputs = [ pandoc ];
 
+    phases = [ "unpackPhase" "buildPhase" "installPhase" ];
+
     buildPhase = ''
-      ./make build
+       mkdir -p ./public
+      ./build.sh
     '';
 
     installPhase = ''
