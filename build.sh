@@ -93,6 +93,7 @@ while IFS= read -r f ; do
 
     post="<p class=\"post_date\">$post_date</p>$post"
     post="<h1 class=\"post_title\">$post_title</h1>$post"
+    post="<a href="index.html">back</a>$post"
     pre_with_title=$(echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/$post_title/")
 
     # Couldn't easily do this with sed since the replacement string needs to be
