@@ -1,0 +1,57 @@
+I currently run Arch, NixOS and MacOS and I'm a bit torn between just using Nix, but relying on Pacman and Homebrew respectively, or if I should fully commit to Nixpkgs as much as possible on Arch and MacOS. There are a few programs and Home Manager settings which are a bit problematic (more on that later), but as a first step I looked at how the versions in the repositories differ.
+
+I picked some applications which I use on a daily basis:
+
+```text
+bat
+exa
+anki
+entr
+git
+alacritty
+tmux
+ripgrep
+fzf
+firefox
+slack
+spotify
+zoom
+vscode
+neofetch
+neovim
+pandoc
+fish
+dhall
+jetbrains-toolbox
+```
+
+and then checked their version in different repositories with the repology API:
+
+```fish
+#!/usr/bin/env fish
+
+echo '['
+
+while read -la name
+    curl -s -X GET "https://repology.org/api/v1/project/$name"\
+    | jq 'map(select(.repo | contains("arch") or contains("nix") or contains("aur") or contains("homebrew"))) | map({ name: .visiblename, version: .version, repo: .repo})'\
+    | sed '$d'\
+    | sed '1d'
+end
+
+echo ']'
+```
+
+You can run the whole thing with `echo bat exa entr git alacritty tmux ripgrep fzf firefox slack spotify zoom visual-studio-code neofetch neovim pandoc fish dhall jetbrains-toolbox | string split " " | ~/pkgs_repology.fish > versions.json` to get a JSON file which you can process further or just inspect visually.
+
+It's not a very robust approach since for example Slack is called "slack-desktop" in AUR but just "slack" in Nixpkgs, so some manual searching is still required. It seems that Arch, Homebrew and Nix unstable are generally quite close to each other. The AUR is often a bit further ahead, especially since it often has `*-git` packages which track `master` of the source repository. Meaning you can just navigate to the folder with the `PKGBUILD` and run `makepkg -si` as often as you want to always get the most recent version. Nix stable is often lagging behind a bit, but not Ubuntu style.
+
+At the end of the day it's often trivial to track `master` with Nix as well, since you can just create an overlay where you constantly update the `sha256` you'd like to pull. There's even a program called `niv` which can help you manage those dependencies. But if you're doing that you need to be prepared for packages occasionally breaking if their build process as changed, regardless of which operating system you run.
+
+What's more interesting is looking at a couple of "blessed" packages which stand out: Anki, the flashcard program, is at `2.1.26` in Arch, whereas both stable and unstable in Nix are at `2.1.15`. I tried updating the version through an overlay but it seems that the build process has changed. So here it's really convenient that Arch has a very recent version already (the most recent is `2.1.28` at the time of writing).
+
+Dhall is at `1.24.0` in Nix stable but `1.33.1` in Arch. That's a significant difference, depending on how important new language features are to you.
+
+Ultimately comparing package versions doesn't really help me decide if I'd rather use pacman, Homebrew or Nix on the respective OSes. The differences are generally not very meaningful and for the packages where it matters I can usually just create an overlay in Nix.
+
+## What Doesn't Work So Well in Nix
