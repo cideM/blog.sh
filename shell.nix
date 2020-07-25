@@ -8,5 +8,6 @@ mkShell {
     zip
     nixpkgs-fmt
     shellcheck
+    coreutils
   ];
 }

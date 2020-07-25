@@ -37,49 +37,48 @@ HTML_SKELETON_POST='
 </body>
 </html>'
 
-POSTS_SORTED=$(\
-for f in posts/*/date
-do
-    printf '%s|%s\n' "$f" $(cat $f)
-done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname)
+POSTS_SORTED=$(
+	for f in posts/*/date; do
+		printf '%s|%s\n' "$f" $(cat $f)
+	done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname
+)
 
 # Here's the standard POSIX way of looping over a multiline string in a
 # variable:
 # echo "$variable" | while IFS= read -r line ; do echo $line; done
 # Use this to loop over the file
-while IFS= read -r f ; do
-    publish=$(echo "$f" | awk -F'|' '{ print $4 }')
+while IFS= read -r f; do
+	publish=$(echo "$f" | awk -F'|' '{ print $4 }')
 
-    if [ "$publish" = "false" ]
-    then
-        continue
-    fi
+	if [ "$publish" = "false" ]; then
+		continue
+	fi
 
-    post_date=$(cat "$f"/date)
-    post_title=$(cat "$f"/title)
-    file_out="$(basename "$f")".html
+	post_date=$(cat "$f"/date | xargs date '+%B %-d, %Y' --date)
+	post_title=$(cat "$f"/title)
+	file_out="$(basename "$f")".html
 
-    TOC="$TOC
+	TOC="$TOC
     <li>"
-    TOC="$TOC
+	TOC="$TOC
         <a class=\"toc_link\" href=\"$file_out\">$post_title</a>"
-    TOC="$TOC
+	TOC="$TOC
         <p class=\"toc_date\">$post_date</p>"
-    TOC="$TOC
+	TOC="$TOC
     </li>"
 
-    post=$(pandoc --from markdown --to html "$f"/content)
+	post=$(pandoc --from markdown --to html "$f"/content)
 
-    post="<p class=\"post_date\">$post_date</p>$post"
-    post="<h1 class=\"post_title\">$post_title</h1>$post"
-    post="<a href="index.html">back</a>$post"
-    pre_with_title=$(echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/$post_title/")
+	post="<p class=\"post_date\">$post_date</p>$post"
+	post="<h1 class=\"post_title\">$post_title</h1>$post"
+	post="<a href="index.html">back</a>$post"
+	pre_with_title=$(echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/$post_title/")
 
-    # Couldn't easily do this with sed since the replacement string needs to be
-    # escaped
-    printf "%s" "$pre_with_title" > ./public/"$file_out"
-    printf "%s" "$post" >> ./public/"$file_out"
-    echo "$HTML_SKELETON_POST" >> ./public/"$file_out"
+	# Couldn't easily do this with sed since the replacement string needs to be
+	# escaped
+	printf "%s" "$pre_with_title" >./public/"$file_out"
+	printf "%s" "$post" >>./public/"$file_out"
+	echo "$HTML_SKELETON_POST" >>./public/"$file_out"
 
 done <<EOF
 $POSTS_SORTED
@@ -91,8 +90,8 @@ EOF
 TOC="$TOC
 </ul>"
 
-echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/fbrs/" > ./public/index.html
-printf "%s" "$TOC" >> ./public/index.html
-echo "$HTML_SKELETON_POST" >>  ./public/index.html
+echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/fbrs/" >./public/index.html
+printf "%s" "$TOC" >>./public/index.html
+echo "$HTML_SKELETON_POST" >>./public/index.html
 
 cp ./styles.css public
