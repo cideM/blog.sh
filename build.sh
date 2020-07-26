@@ -45,6 +45,12 @@ POSTS_SORTED=$(
 	done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname
 )
 
+tags() {
+	while IFS= read -r tag; do
+		echo "<span class=\"tag\">$tag</span>"
+	done
+}
+
 # Here's the standard POSIX way of looping over a multiline string in a
 # variable:
 # echo "$variable" | while IFS= read -r line ; do echo $line; done
@@ -64,8 +70,13 @@ while IFS= read -r f; do
         <li>"
 	TOC="$TOC
         <a class=\"toc_link\" href=\"$file_out\">$post_title</a>"
-	TOC="$TOC
-        <p class=\"toc_date\">$post_date</p>"
+
+	if [ -s "$f"/tags ]; then
+		TOC="$TOC<p class=\"toc_date\">$post_date | $(tags <"$f"/tags)</p>"
+	else
+		TOC="$TOC<p class=\"toc_date\">$post_date</p>"
+	fi
+
 	TOC="$TOC
         </li>"
 

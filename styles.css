@@ -37,6 +37,12 @@ a.fat {
     font-size: 1.25em;
 }
 
+.toc .tag {
+    /* border: 1px solid #CCC; */
+    /* border-radius: 4px; */
+    /* padding: 0.1em 0.3em; */
+}
+
 .toc li {
     list-style-type: none;
     margin-bottom: 1.5em;
