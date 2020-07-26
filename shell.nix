@@ -9,5 +9,7 @@ mkShell {
     nixpkgs-fmt
     shellcheck
     coreutils
+    nodejs
+    entr
   ];
 }

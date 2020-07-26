@@ -11,54 +11,19 @@ html {
     color: hsla(0,0%,0%,0.8);
 }
 
-header {
-    height: 3rem;
+a.fat {
+    color: hsla(0,0%,0%,0.8);
+    text-decoration: none;
+    border-bottom: 1px solid #F17C67;
+    box-shadow: 0 -4px 0 #F17C67 inset;
+}
+
+.header_links {
     display: flex;
-    align-items: center;
 }
 
-code {
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 1rem;
-    background: #fff4ea;
-    padding: 0 0.3em;
-}
-
-pre {
-    overflow: auto;
-    background: #fff4ea;
-    padding: 1rem;
-}
-
-pre code {
-    padding: 0;
-    font-size: 0.80rem;
-    background: #fff4ea;
-}
-
-blockquote {
-    position: relative;
-    padding: 1rem 2rem;
-    margin: 0;
-}
-
-blockquote p {
-    margin: 0;
-}
-
-blockquote::before {
-    position: absolute;
-    content: "";
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    width: 0.46667rem;
-    background: rgba(0, 0, 0, 0) linear-gradient(120deg, rgb(132, 250, 176) 0%, rgb(143, 211, 244) 100%) repeat scroll 0% 0%;
-}
-
-a {
-    color: #074db9;
-    text-decoration: underline;
+.header_links > * {
+    margin-right: 0.5em;
 }
 
 .toc {
@@ -69,29 +34,82 @@ a {
     color: inherit;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.8em;
+    font-size: 1.25em;
 }
-
-.github_link {
-    color: inherit;
-    text-decoration: underline;
-}
-
 
 .toc li {
     list-style-type: none;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5em;
 }
 
 .toc_date {
-    margin-top: 0.35rem;
+    margin-top: 0.25rem;
+    color: #777777;
 }
 
-.post_title {
-    text-align: center;
-    margin-bottom: 0;
+/* POST */
+
+.post_container h2 {
+    font-size: 1.2rem;
 }
 
-.post_date {
+.post_container header h1 {
+    font-size: 1.8rem;
     text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.25em;
+}
+
+.post_container header p {
+    text-align: center;
+    margin: 0;
+}
+
+.post_container header {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.post_container code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9em;
+    background: #fff4ea;
+    padding: 0 0.3em;
+}
+
+.post_container pre {
+    overflow: auto;
+    background: #fff4ea;
+    padding: 1rem;
+}
+
+.post_container pre code {
+    padding: 0;
+    font-size: 0.80rem;
+    background: #fff4ea;
+}
+
+.post_container blockquote {
+    position: relative;
+    padding: 1rem 2rem;
+    margin: 0;
+}
+
+.post_container blockquote p {
+    margin: 0;
+}
+
+.post_container blockquote::before {
+    position: absolute;
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 0.46667rem;
+    background: rgba(0, 0, 0, 0) linear-gradient(120deg, rgb(132, 250, 176) 0%, rgb(143, 211, 244) 100%) repeat scroll 0% 0%;
+}
+
+.post_container a {
+    color: inherit;
+    text-decoration: underline;
 }

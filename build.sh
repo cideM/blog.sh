@@ -28,8 +28,10 @@ HTML_SKELETON_PRE='
 
 # Start of table of contents
 TOC='
-<header>
-    <a class="github_link" href="https://github.com/cideM/">florian beeres</a>
+<header class="header_links">
+    <p>florian beeres</p>
+    <p>Λ</p>
+    <p><a class="fat" href="https://github.com/cideM/">GitHub</a></p>
 </header>
 <ul class="toc">'
 
@@ -39,7 +41,7 @@ HTML_SKELETON_POST='
 
 POSTS_SORTED=$(
 	for f in posts/*/date; do
-		printf '%s|%s\n' "$f" $(cat $f)
+		printf '%s|%s\n' "$f" "$(cat "$f")"
 	done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname
 )
 
@@ -54,26 +56,29 @@ while IFS= read -r f; do
 		continue
 	fi
 
-	post_date=$(cat "$f"/date | xargs date '+%B %-d, %Y' --date)
+	post_date=$(date '+%B %-d, %Y' --date "$(cat "$f"/date)")
 	post_title=$(cat "$f"/title)
 	file_out="$(basename "$f")".html
 
 	TOC="$TOC
-    <li>"
+        <li>"
 	TOC="$TOC
         <a class=\"toc_link\" href=\"$file_out\">$post_title</a>"
 	TOC="$TOC
         <p class=\"toc_date\">$post_date</p>"
 	TOC="$TOC
-    </li>"
+        </li>"
 
-	post=$(pandoc --from markdown --to html "$f"/content)
+	post="<article class=\"post_container\">"
+	post="$post<a href=\"index.html\">back</a>"
+	post="$post<header>"
+	post="$post<h1>$post_title</h1>"
+	post="$post<p class=\"post_date\">$post_date</p>"
+	post="$post</header>"
+	post="$post$(pandoc --from markdown --to html "$f"/content)"
+	post="$post</article>"
 
-	post="<p class=\"post_date\">$post_date</p>$post"
-	post="<h1 class=\"post_title\">$post_title</h1>$post"
-	post="<a href="index.html">back</a>$post"
 	pre_with_title=$(echo "$HTML_SKELETON_PRE" | sed "s/%%TITLE%%/$post_title/")
-
 	# Couldn't easily do this with sed since the replacement string needs to be
 	# escaped
 	printf "%s" "$pre_with_title" >./public/"$file_out"
