@@ -1,0 +1,121 @@
+## TL;DR
+
+`nixpkgs.overlays` in `home.nix` applies overlays to the package collection which is used by Home Manager, for example when you do `programs.alacritty.enable = true`. If you install packages from a package collection managed manually (or with `niv`), you'll have to pass your overlays to *that Nixpkgs collection*, like so:
+
+```nix
+  pkgs = import sources.nixpkgs {
+    overlays = [
+       (import ./programs/anki/overlay.nix)
+    ];
+  };
+```
+
+## Intro
+
+I try to install as many packages as possible through Nix, since it's the only way to synchronize packages across all of NixOS, Arch Linux and MacOS. For the most part that just means adding more packages to the list in `home.packages`:
+
+```nix
+home.packages = with pkgs; shared.pkgs ++ [
+  iotop
+  xclip
+  neofetch
+  jrnl
+];
+```
+
+But every so often I want to customize these packages, for example to install a newer version than what's available in Nixpkgs unstable. Nix provides a very convenient mechanism for this, called [overlays](https://nixos.org/nixpkgs/manual/#chap-overlays).
+
+## The Problem
+
+I was recently trying to bump the version of Anki, the flashcard program. I wrote an overlay (shown below) with a more recent `version`, added it to `nixpkgs.overlays` in my `home.nix` and ran `home-manager switch`. Yet nothing happened. Many confusion, much puzzle.
+
+```nix
+final: prev:
+{
+  anki = prev.anki.overrideAttrs (oldAttrs: rec {
+    version = "2.1.15";
+    pname = oldAttrs.pname;
+    src = prev.fetchurl {
+      urls = [
+        "https://github.com/ankitects/anki/archive/${version}.tar.gz"
+      ];
+      sha256 = "1yc6rhrm383k6maq0da0hw779i00as6972jai0958m6gmj32kz0n";
+    };
+  });
+}
+```
+
+What made this even more confusing was that I had other overlays which were working just fine. For example, I have this overlay which installs a newer version of Alacritty.
+
+```nix
+{ pkgs, ... }:
+
+final: prev:
+{
+  alacritty = prev.alacritty.overrideAttrs (drv: rec {
+    version = "0.5.0";
+    pname = "alacritty";
+
+    src = prev.fetchFromGitHub {
+      owner = "alacritty";
+      repo = pname;
+      rev = "v${version}";
+      sha256 = "0pn1lm0gmvwgwvvmzpsrgqfbzk52lavxz4y619dnh59f22n7625z";
+    };
+
+    cargoDeps = drv.cargoDeps.overrideAttrs (prev.lib.const {
+      inherit src;
+      outputHash = "0ngixk8qh83y2b3b2d1f5cdlpmymaqy0vg4c12mhqb9vy6zrjwyc";
+    });
+  });
+}
+```
+
+So what's the difference between these two overlays?
+
+## The Solution
+
+I was applying both overlays by adding them to `nixpkgs.overlays` in `home.nix`. In the case of Alacritty that's fine, because Alacritty is managed entirely through Home Manager (HM). You can flip a boolean `programs.alacritty.enable = true;` and HM will [add Alacritty](https://github.com/rycee/home-manager/blob/master/modules/programs/alacritty.nix#L44) to your installed packages. And it is to **those packages** that the overlays defined in `nixpkgs.overlays` are applied. Confused by what that means? Me too.
+
+The thing is that the Nix package set isn't something magical that's always available globally. It's an attribute set that's returned from a function. And because I really want things to be reproducible I manage the versions of all installed sources, including Nixpkgs, through `niv`. That's why I have this
+
+```nix
+  sources = import ./nix/sources.nix;
+
+  pkgs = import sources.nixpkgs { };
+```
+
+in the Nix file that lists the packages I want to install on all my machines/OSes -- which includes Anki. Notice the empty `{ }` above? That's how you can customize this Nix package set. More specifically, these are the arguments passed to [this function](https://github.com/NixOS/nixpkgs/blob/master/pkgs/top-level/default.nix), which
+
+> composes the Nix Packages collection
+
+And it is from `pkgs` that I install Anki. Installing the packages from `home.packages` is still done by HM, but the package derivations come from the custom Package collection I created and stored in the `pkgs` variable. The `pkgs` variable in the snippet below has nothing to do with the package collection used by `home.packages`. And that's why one of my overlays wasn't working, since I was applying it to the wrong package collection.
+
+```nix
+let
+  sources = import ./nix/sources.nix;
+
+  pkgs = import sources.nixpkgs { };
+
+  sharedPkgs = with pkgs; [
+    anki
+  ];
+
+in {
+  pkgs = sharedPkgs;
+}
+```
+
+If I change the `nixpkgs` call to
+
+```nix
+  pkgs = import sources.nixpkgs {
+    overlays = [
+      (import ./programs/anki/overlay.nix)
+    ];
+  };
+```
+
+the Anki overlay is finally active (and breaks because it's more complication that just increasing the version number, since apparently the build process has also changed).
+
+This is why you don't want to import and instantiate Nixpkgs in various source files. Rather, import it once, apply whatever overlays you want, and then pass the result to your other source files. That way you centralize your overlays in one place. It's why many of my Nix sources in my [dotfiles](https://github.com/cideM/dotfiles/tree/4a59a6dd59146a79feef279f8377cc626016273c) repo currently start with `{ pkgs, sources, ... }:` (I think there's a more elegant way of doing this with `callPackage` but I haven't had time to look into this yet).
