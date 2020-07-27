@@ -36,6 +36,7 @@ TOC='
 <ul class="toc">'
 
 HTML_SKELETON_POST='
+<a class="footer_link" href="https://github.com/cideM/blog.sh">Built with Shell, Pandoc and Nix</a>
 </body>
 </html>'
 

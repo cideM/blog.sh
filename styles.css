@@ -20,6 +20,7 @@ a.fat {
 
 .header_links {
     display: flex;
+    margin: 1em 0;
 }
 
 .header_links > * {
@@ -52,6 +53,13 @@ a.fat {
 .toc_date {
     margin-top: 0.25rem;
     color: #777777;
+}
+
+.footer_link {
+    color: #777777;
+    margin: 0 auto;
+    display: block;
+    width: max-content;
 }
 
 /* POST */
