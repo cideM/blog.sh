@@ -1,0 +1,27 @@
+## Introduction
+
+I'm a jack of all trades with a focus on functional programming. I like software that works, not just today, but also next year. To achieve that, I try as much as possible to gain a deep understanding of the tools I work with and to keep my code as simple as the problem allows. I\'m also a firm believer in a slower, more methodical approach. In my opinion production code should always come with logging, monitoring, documentation and tests, even if that takes more time.
+
+But I don\'t just enjoy writing code, I also love writing and talking about it. As a self-taught developer I can appreciate the value of mentoring and I do my best to pass my knowledge on.
+
+**Primary Skills: Javascript, Golang and Haskell**
+
+Other Skills: Clojure, Purescript, Shell scripts, **Docker**, HTML, CSS, Lua, Rust, Monitoring, **Kubernetes**, Dhall, **Nix**
+
+## Since 2020: Fullstack Developer @ AMBOSS
+
+I started writing mostly Golang, while once again setting up performance monitoring and tracing, this time with Datadog. I've also gained dev ops experience by maintaining the Kubernetes and Docker infrastructure for the project. Other highlights of the current project include building a pipeline starting with XML files and ending with a search and suggestions index in ElasticSearch. Aside from my backend duties I\'m also offering guidance and code reviews for the front end part of the project.
+
+## 2018 - 2019: Frontend Developer @ AMBOSS
+
+Worked on a new React/GraphQL single page application. Highlights included working on performance monitoring with Prometheus and Grafana, creating a custom scheduler for rendering large amounts of JSX, and creating a module for tree-related operations where the traversal is customizable (e.g., depth and breadth first iterators).
+
+## 2017: Junior Frontend Developer @ AMBOSS
+
+Towards the end of 2016 I had started teaching myself how to code on the side. In the 2017 I transitioned into a full time frontend developer role. I ended up maintaing Javascript in server-rendered PHP templates, an Angular 1.x single page application, webviews on iOS and Android devices and few other smaller projects. I learned very valuable lessons when it comes to coordinating releases across teams and repositories, the value of tests and documentation and how Javascript has evolved from jQuery to React.
+
+## 2015 - 2017: Medical Editor & Team Coordinator @ AMBOSS
+
+I joined AMBOSS due to my experience with the United States Medical Licensing Exams and subsequently became the founder and emoployee number one of our US expansion. This role required finding pragmatic solutions to problems I had never encountered before on a weekly basis (yes, spreadsheets were involved, lots of them). One of the biggest challenges was hiring a completely new team of full- and part-time editors and ensuring that everyone is productive and feels welcome in a company that had until then been based entirely in Germany. We also needed to create completely new workflows for creating US content from scratch and translating existing content where possible. All of that before I knew what agile was.
+
+## 2007 - 2014: Doctor of Medicine, M.D. @ University of Duesseldorf

@@ -4,10 +4,10 @@
 
 base_name="posts/$1"
 mkdir -p "$base_name"
-echo '' > "$base_name"/title
-echo '' > "$base_name"/tags
+touch "$base_name"/title
+touch "$base_name"/tags
 echo "$(date)" > "$base_name"/date
-echo '' > "$base_name"/content
+touch "$base_name"/content
 echo '1' > "$base_name"/publish
 
 echo "Created post $base_name"

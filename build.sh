@@ -32,6 +32,8 @@ TOC='
     <p>florian beeres</p>
     <p>Λ</p>
     <p><a class="fat" href="https://github.com/cideM/">GitHub</a></p>
+    <p>Λ</p>
+    <p><a class="fat" href="resume.html">Resume</a></p>
 </header>
 <ul class="toc">'
 
