@@ -1,4 +1,13 @@
+<!-- vim-markdown-toc GFM -->
+
+* [The Contagious Effect of Defensive Coding](#the-contagious-effect-of-defensive-coding)
+* [Conditionally Rendering Hooks](#conditionally-rendering-hooks)
+
+<!-- vim-markdown-toc -->
+
 Hooks have taken the React world by storm and they're here to stay whether you like it or not. I can understand the appeal of their simplicity since it's hard to be more concise than `const [foo, setFoo] = useState()`. But there are use cases where I think that higher-order component (HOC) fare better than hooks and one of them is _branching logic_.
+
+## The Contagious Effect of Defensive Coding
 
 Imagine a component a that makes a network request and depending on the result, you either render a loading spinner or an entire subtree of components.
 
@@ -29,6 +38,8 @@ const Foo = (url) => {
 Both `useState` and `useSomeEffect` expect the request to have succeeded and `data` to be available. But that's not the case if the request is still loading and/or if it failed. You have two options for handling this: make both hooks fail gracefully in case of missing data or not render the hooks at all. Option 1 is what I see most people reach for instinctively. It's the safe and easy thing to do. But I consider `if !x then else` an anti-pattern and the worst thing about it is that it spreads like wildfire. The next person who works on this code will see the _defensive coding_ and conclude that all bets are off and `data` can be whatever, so they to will litter their code with `if !x then else`.
 
 Therefore I try to use option 2 as much as possible. But you can't conditionally return before rendering a hook, it [just doesn't work](https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level).
+
+## Conditionally Rendering Hooks
 
 What you can do however is **conditionally render a component containing all the hooks**.
 

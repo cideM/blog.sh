@@ -64,6 +64,11 @@ a.fat {
 
 /* POST */
 
+.post_container header + ul {
+    text-align: center;
+    list-style-type: none;
+}
+
 .post_container h2 {
     font-size: 1.2rem;
 }
