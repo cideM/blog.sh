@@ -1,4 +1,4 @@
-Hooks have taken the React world by storm and they're here to stay whether you like it or not. I can definitely understand the appeal of their simplicity, since it's hard to be more concise than `const [foo, setFoo] = useState()`. But there are use cases where I think that higher order component (HOC) fare better than hooks and one of them is _branching logic_.
+Hooks have taken the React world by storm and they're here to stay whether you like it or not. I can understand the appeal of their simplicity since it's hard to be more concise than `const [foo, setFoo] = useState()`. But there are use cases where I think that higher-order component (HOC) fare better than hooks and one of them is _branching logic_.
 
 Imagine a component a that makes a network request and depending on the result, you either render a loading spinner or an entire subtree of components.
 
@@ -64,6 +64,6 @@ const withFoo = WrappedComponent = props => {
 const Foo = withFoo(FooWithHooks)
 ```
 
-I suspect that this pattern isn't exactly news to many people, since it's how many libraries used to expose their functionality before hooks (think `graphql` HOC from Apollo). But I know very well that it can be super attractive to throw out the old and replace it with the new One True Way of doing things. And in many cases hooks will probably make your life easier. But HOCs are still a really important design pattern and an essential part of every React developer's toolkit. Right tool for the job and all.
+I suspect that this pattern isn't exactly news to many people, since it's how many libraries used to expose their functionality before hooks (think `graphql` HOC from Apollo). But I know very well that it can be super attractive to throw out the old and replace it with the new One True Way of doing things. And in many cases, hooks will probably make your life easier. But HOCs are still a really important design pattern and an essential part of every React developer's toolkit. Right tool for the job and all.
 
 <3
