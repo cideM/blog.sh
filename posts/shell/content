@@ -1,0 +1,36 @@
+I've been writing some shell programs lately ([fish-journal](https://github.com/cideM/fish-journal/) [fish-notes](https://github.com/cideM/fish-notes/)) and there's a recurring pattern. I often need to attach meta data to stuff, such as the date of a post or if it should be published. My initial approach was to use frontmatter in combination with markdown, like so:
+
+```markdown
+---
+title: Foo
+date: Sun 09 Aug 2020 11:32:18 AM CEST
+---
+
+More content here
+```
+
+I'm just very used to this from the Javascript ecosystem, which has [several](https://github.com/jonschlinkert/gray-matter) [tools](https://github.com/remarkjs/remark-frontmatter) for working with frontmatter. In Shell scripts this turned out to be awkward for various reasons. It breaks other markdown tools that don't know how to parse frontmatter. It also means that any operation on these files that needs to work with meta data requires parsing that meta data first. While not an insurmountable task it seemed like something I shouldn't have to do.
+
+Then I realized that if "everything is a file", why not apply that to meta data as well? A blog post now looks like this:
+
+```shell
+blog_simple (master|+1u5) λ tree posts/shell/
+posts/shell/
+├── content
+├── date
+├── publish
+├── tags
+└── title
+```
+
+Each piece of meta data lives in its own file. This makes it trivial to e.g., operate on all dates through shell globs `cat posts/*/date` and requires only minimal amounts of plumbing. If you want to sort all posts by their date you first print each post in the form of a filepath together with the respective date and then you can just use `sort` and throw away the 2nd column (the dates) -- you're left with a list of filenames sorted by publishing date. At some point you'll then have to use `dirname` to get to the folder name respresenting the post as a whole. Taken straight from the `build.sh` of this blog:
+
+```sh
+posts_sorted() {
+	for f in posts/*/date; do
+		printf '%s|%s\n' "$f" "$(cat "$f")"
+	done | sort -t '|' -r -k 2 | cut -d '|' -f 1 | xargs dirname
+}
+```
+
+The more I learn about Shell scripts the more I'm amazed how far you can take this concept without having to become a [Shell God Walking Amongst Mere Mortals](https://github.com/dylanaraps/)

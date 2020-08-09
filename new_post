@@ -2,11 +2,16 @@
 
 # ./new_post my_title
 
+if test $# -eq 0; then
+    echo "Post name can't be empty"
+    exit 1
+fi
+
 base_name="posts/$1"
 mkdir -p "$base_name"
 touch "$base_name"/title
 touch "$base_name"/tags
-echo "$(date)" > "$base_name"/date
+date > "$base_name"/date
 touch "$base_name"/content
 echo '1' > "$base_name"/publish
 
