@@ -1,0 +1,5 @@
+Ever wondered why [zoom](https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=zoom) has an optional dependency on `picom` in the Arch User Repository (AUR)? It says
+
+> extra compositor needed by some window managers for screen sharing
+
+If only I had actually bothered to read this at some point, because then I wouldn't have had to wonder why Zoom whiteboards wouldn't work for me when inside a `bspwm` session (tiling window manager without a compositor). If I start `picom` together with `bspwm` everything works just fine. TIL.
