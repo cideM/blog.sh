@@ -11,7 +11,7 @@ base_name="posts/$1"
 mkdir -p "$base_name"
 touch "$base_name"/title
 touch "$base_name"/tags
-date > "$base_name"/date
+date '+%Y-%m-%d' > "$base_name"/date
 touch "$base_name"/content
 echo '1' > "$base_name"/publish
 
