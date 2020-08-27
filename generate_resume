@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Turn off page numbering
+(cat posts/resume/content; echo "\\pagenumbering{gobble}";) | pandoc\
+    --from markdown\
+    --to pdf\
+    --template eisvogel\
+    --output "$1"\
+    -V disable-header-and-footer=false\
+    -V geometry:"top=2cm, bottom=2cm, left=3cm, right=3cm"

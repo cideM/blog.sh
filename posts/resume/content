@@ -1,32 +1,55 @@
 ---
 title: Resume
 date: August 8, 2020
+fontsize: 10pt
 ---
 
-## Introduction
+# Florian Beeres - Software Engineer
 
-I'm a jack of all trades with a focus on functional programming. I like software that works, not just today, but also next year. To achieve that, I try as much as possible to gain a deep understanding of the tools I work with and to keep my code as simple as the problem allows. I'm also a firm believer in a slower, more methodical approach. In my opinion production code should always come with logging, monitoring, documentation, and tests, even if that takes more time.
+I'm a physician turned software engineer with 4 years of experience in building web applications. My focus is on front-end development and functional programming, but I'm comfortable in any environment. I'm self-taught and extremely driven, and consider programming both job and favorite pastime.
 
-But I don't just enjoy writing code, I also love writing and talking about it. As a self-taught developer, I can appreciate the value of mentoring and I do my best to pass my knowledge on.
+## Skills
 
-**Primary Skills: Javascript, Golang, and Haskell**
+Languages: **Javascript, Golang**, Haskell, Clojure, Lua, Nix, Dhall, Shell (Fish and POSIX), Purescript\
+Tools: GraphQL, Docker, Kubernetes, Git, HTML, CSS, Linux, Vim, Management experience\
+Frameworks & Libraries: React, Redux, Styled Components, Webpack, Apollo, Jest
 
-Other Skills: Clojure, Purescript, Shell scripts, Docker, HTML, CSS, Lua, Rust, Monitoring, Kubernetes, Dhall, Nix
+## Education
 
-## Since 2020: Fullstack Developer @ AMBOSS
+Doctor of Medicine, M.D.\
+University of Duesseldorf | 2007 - 2014
 
-I started writing mostly Golang, while once again setting up performance monitoring and tracing, this time with Datadog. I’ve also gained DevOps experience by maintaining the Kubernetes and Docker infrastructure for the project. Other highlights of the current project include building a pipeline starting with XML files and ending with a search and suggestions index in ElasticSearch. Aside from my backend duties, I'm also offering guidance and code reviews for the front end part of the project.
+## Experience
 
-## 2018 - 2019: Frontend Developer @ AMBOSS
+**Fullstack Developer**\
+AMBOSS | Since 2019
 
-Worked on a new React/GraphQL single page application. Highlights included working on performance monitoring with Prometheus and Grafana, creating a custom scheduler for rendering large amounts of JSX, and creating a module for tree-related operations where the traversal is customizable (e.g., depth and breadth-first iterators).
+* Design and implement an ETL pipeline in Golang from scratch
+* Create new rich text format for HTML documents for use by mobile and web clients
+* Provide mentoring to junior front-end colleagues
+* Participate in and contribute to QA, front end, platform, and Golang guilds
+* Responsible for monitoring, distributed tracing and most Kubernetes-related aspects of the project
 
-## 2017: Junior Frontend Developer @ AMBOSS
+**Frontend Developer**\
+AMBOSS | 2018 - 2019
 
-Towards the end of 2016, I had started teaching myself how to code on the side. In 2017 I transitioned into a full-time frontend developer role. I ended up maintaining Javascript in server-rendered PHP templates, an Angular 1.x single page application, web views on iOS and Android devices, and few other smaller projects. I learned very valuable lessons when it comes to coordinating releases across teams and repositories, the value of tests and documentation, and how Javascript has evolved from jQuery to React.
+* Create new single-page React application from scratch
+* Build performance monitoring with Prometheus and Grafana
+* Research and improve rendering performance for large amounts of JSX on older browsers
+* Build generic tree-related operations for various tree-based UI elements
 
-## 2015 - 2017: Medical Editor & Team Coordinator @ AMBOSS
+**Junior Frontend Developer**\
+AMBOSS | 2017
 
-I joined AMBOSS due to my experience with the United States Medical Licensing Exams and subsequently became the founder and employee number one of our US expansion. This role required finding pragmatic solutions to problems I had never encountered before every week (yes, spreadsheets were involved, lots of them). One of the biggest challenges was hiring a completely new team of full- and part-time editors and ensuring that everyone is productive and feels welcome in a company that had until then been based entirely in Germany. We also needed to create completely new workflows for creating US content from scratch and translating existing content where possible. All of that before I knew what agile was.
+* Maintain and extend Javascript projects running in various environments (e.g., server-rendered templates, Angular single-page application, web views on mobile)
+* Introduce new React components without disrupting existing non-React code
+* Use JQuery, vanilla JS, React and Angular while supporting a wide range of browsers including IE11
 
-## 2007 - 2014: Doctor of Medicine, M.D. @ University of Duesseldorf
+**Founding Member & Co-Lead US Expansion**\
+AMBOSS | 2015 - 2017
+
+* Hire and integrate a completely new team of full- and part-time medical editors working both remotely and onsite
+* Invent new workflows for creating medical content
+* Market Analysis and project management
+* Develop didactic concepts tailored to new user needs
+
